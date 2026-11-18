@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Links</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1d2330;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --border: #e5e7eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151c;
+      --card: #1b2029;
+      --text: #e6e9ef;
+      --muted: #9aa3b2;
+      --accent: #6ea0ff;
+      --border: #2a3140;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1rem 4rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  main { max-width: 960px; margin: 0 auto; }
+  h1 { margin: 0 0 .25rem; font-size: 1.8rem; }
+  .sub { color: var(--muted); margin: 0 0 1.5rem; }
+  #search {
+    width: 100%;
+    padding: .7rem .9rem;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  h2 {
+    margin: 0 0 .6rem;
+    font-size: 1.1rem;
+    padding-bottom: .4rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin: .3rem 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>My Links</h1>
+  <p class="sub">Everything useful, in one place.</p>
+  <input id="search" type="search" placeholder="Filter links..." autofocus>
+
+  <div class="grid">
+
+    <!-- To add a link, copy a <li> line and change the URL and name. -->
+
+    <section>
+      <h2>🤖 AI</h2>
+      <ul>
+        <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
+        <li><a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a></li>
+        <li><a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a></li>
+        <li><a href="https://huggingface.co" target="_blank" rel="noopener">Hugging Face</a></li>
+        <li><a href="https://arxiv.org/list/cs.AI/recent" target="_blank" rel="noopener">arXiv (cs.AI)</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📊 Data Analytics</h2>
+      <ul>
+        <li><a href="https://www.kaggle.com" target="_blank" rel="noopener">Kaggle</a></li>
+        <li><a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener">pandas Docs</a></li>
+        <li><a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener">SQL Tutorial</a></li>
+        <li><a href="https://public.tableau.com" target="_blank" rel="noopener">Tableau Public</a></li>
+        <li><a href="https://stackoverflow.com" target="_blank" rel="noopener">Stack Overflow</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🎓 School</h2>
+      <ul>
+        <li><a href="https://classroom.google.com" target="_blank" rel="noopener">Google Classroom</a></li>
+        <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+        <li><a href="https://www.khanacademy.org" target="_blank" rel="noopener">Khan Academy</a></li>
+        <li><a href="https://drive.google.com" target="_blank" rel="noopener">Google Drive</a></li>
+        <li><a href="https://calendar.google.com" target="_blank" rel="noopener">Calendar</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🏅 Sports</h2>
+      <ul>
+        <li><a href="https://www.espn.com" target="_blank" rel="noopener">ESPN</a></li>
+        <li><a href="https://www.nba.com" target="_blank" rel="noopener">NBA</a></li>
+        <li><a href="https://www.nfl.com" target="_blank" rel="noopener">NFL</a></li>
+        <li><a href="https://www.mlb.com" target="_blank" rel="noopener">MLB</a></li>
+        <li><a href="https://www.reddit.com/r/sports/" target="_blank" rel="noopener">r/sports</a></li>
+      </ul>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  // Simple live filter: hides links (and empty sections) that don't match.
+  const box = document.getElementById('search');
+  box.addEventListener('input', () => {
+    const q = box.value.trim().toLowerCase();
+    document.querySelectorAll('section').forEach(sec => {
+      let any = false;
+      sec.querySelectorAll('li').forEach(li => {
+        const match = li.textContent.toLowerCase().includes(q);
+        li.classList.toggle('hidden', !match);
+        if (match) any = true;
+      });
+      sec.classList.toggle('hidden', !any);
+    });
+  });
+</script>
+</body>
+</html>
